@@ -25,6 +25,8 @@ export async function createGameFolder(accessToken: string, gameName: string) {
     });
     rootId = created.data.id!;
   }
+  
+  gameName = gameName.replace(/'/g, "\\'");
 
   const existingGameFolder = await drive.files.list({
     q: `name='${gameName}' and mimeType='application/vnd.google-apps.folder' and trashed=false and '${rootId}' in parents`,
